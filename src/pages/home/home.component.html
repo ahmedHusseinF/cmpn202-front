@@ -1,0 +1,206 @@
+<div class="outer-container flex-space-between flex-wrap padding-left-right">
+  <div class="portlet box blue data">
+    <div class="portlet-title">
+      <div class="caption">
+        <span class="caption-subject bold uppercase">Total IN & OUT</span>
+      </div>
+    </div>
+    <div class="portlet-body">
+      <div>
+        <div class="flex-space-around flex-wrap">
+          <div class="inner-container flex-space-between">
+            <i class="fa fa-arrow-down"></i>
+            <div>
+              <span class="label label-sm label-success"> IN Count </span>
+              <h3>{{dashBoard.agInfo?.global.credit_daily_count}}</h3>
+            </div>
+            <div>
+              <span class="label label-sm label-info"> IN Amount </span>
+              <h3>{{dashBoard.agInfo?.global.credit_daily_amount}}</h3>
+            </div>
+          </div>
+          <div class="inner-container flex-space-between">
+            <i class="fa fa-arrow-up"></i>
+            <div>
+              <span class="label label-sm label-danger"> OUT Count </span>
+              <h3>{{dashBoard.agInfo?.global.debit_daily_count}}</h3>
+            </div>
+            <div>
+              <span class="label label-sm label-warning"> OUT Amount </span>
+              <h3>{{dashBoard.agInfo?.global.debit_daily_amount}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="portlet box blue-soft data">
+    <div class="portlet-title">
+      <div class="caption">
+        <span class="caption-subject bold uppercase">Total Sales IN & OUT</span>
+      </div>
+    </div>
+    <div class="portlet-body">
+      <div>
+        <div class="flex-space-around flex-wrap">
+          <div class="inner-container flex-space-between">
+            <i class="fa fa-arrow-down"></i>
+            <div>
+              <span class="label label-sm label-success"> IN Count </span>
+              <h3>{{dashBoard.agInfo?.sales.credit_daily_count}}</h3>
+            </div>
+            <div>
+              <span class="label label-sm label-info"> IN Amount </span>
+              <h3>{{dashBoard.agInfo?.sales.credit_daily_amount}}</h3>
+            </div>
+          </div>
+          <div class="inner-container flex-space-between">
+            <i class="fa fa-arrow-up"></i>
+            <div>
+              <span class="label label-sm label-danger"> OUT Count </span>
+              <h3>{{dashBoard.agInfo?.sales.debit_daily_count}}</h3>
+            </div>
+            <div>
+              <span class="label label-sm label-warning"> OUT Amount </span>
+              <h3>{{dashBoard.agInfo?.sales.debit_daily_amount}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flex-space-between flex-wrap padding-left-right">
+  <div class="portlet box blue data">
+    <div class="portlet-title">
+      <div class="caption">
+        <span class="caption-subject bold uppercase">Total Cash IN & OUT</span>
+      </div>
+    </div>
+    <div class="portlet-body">
+      <div>
+        <div class="flex-space-around flex-wrap">
+          <div class="inner-container flex-space-between">
+            <i class="fa fa-arrow-down"></i>
+            <div>
+              <span class="label label-sm label-success"> IN Count </span>
+              <h3>{{dashBoard.agInfo?.cash.credit_daily_count}}</h3>
+            </div>
+            <div>
+              <span class="label label-sm label-info"> IN Amount </span>
+              <h3>{{dashBoard.agInfo?.cash.credit_daily_amount}}</h3>
+            </div>
+          </div>
+          <div class="inner-container flex-space-between">
+            <i class="fa fa-arrow-up"></i>
+            <div>
+              <span class="label label-sm label-danger"> OUT Count </span>
+              <h3>{{dashBoard.agInfo?.cash.debit_daily_count}}</h3>
+            </div>
+            <div>
+              <span class="label label-sm label-warning"> OUT Amount </span>
+              <h3>{{dashBoard.agInfo?.cash.debit_daily_amount}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="portlet box blue-soft data">
+    <div class="portlet-title">
+      <div class="caption">
+        <span class="caption-subject bold uppercase">Total Deposit IN & OUT</span>
+      </div>
+    </div>
+    <div class="portlet-body">
+      <div>
+        <div class="flex-space-around flex-wrap">
+          <div class="inner-container flex-space-between">
+            <i class="fa fa-arrow-down"></i>
+            <div>
+              <span class="label label-sm label-success"> IN Count </span>
+              <h3>{{dashBoard.agInfo?.deposit.credit_daily_count}}</h3>
+            </div>
+            <div>
+              <span class="label label-sm label-info"> IN Amount </span>
+              <h3>{{dashBoard.agInfo?.deposit.credit_daily_amount}}</h3>
+            </div>
+          </div>
+          <div class="inner-container flex-space-between">
+            <i class="fa fa-arrow-up"></i>
+            <div>
+              <span class="label label-sm label-danger"> OUT Count </span>
+              <h3>{{dashBoard.agInfo?.deposit.debit_daily_count}}</h3>
+            </div>
+            <div>
+              <span class="label label-sm label-warning"> OUT Amount </span>
+              <h3>{{dashBoard.agInfo?.deposit.debit_daily_amount}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--       
+<div class="col-md-4 data">
+        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+            <h4 class="widget-thumb-heading">Current Balance</h4>
+            <div class="widget-thumb-wrap">
+                <i class="widget-thumb-icon bg-green icon-bulb"></i>
+                <div class="widget-thumb-body">
+                    <span class="widget-thumb-subtitle">EGP</span>
+                    <span class="widget-thumb-body-stat" data-counter="counterup">{{dashBoard.current_balance}}</span>
+                </div>
+            </div>
+        </div>
+    </div>       -->
+<div class="col-md-12">
+  <div class="portlet box blue full-width">
+    <div class="portlet-title">
+      <div class="caption">
+        <span class="bold uppercase">Recent Transactions</span>
+      </div>
+      <div class="tools">
+        <a href="javascript:;" (click)='getdashboard()' class="reload" data-original-title="" title=""> </a>
+      </div>
+    </div>
+    <div class="portlet-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead *ngIf="dashBoard.allAgentTransactions.length != 0 ">
+            <tr class="uppercase">
+              <th> Type </th>
+              <th> identifier </th>
+              <th> Amount </th>
+              <th> Status </th>
+              <th> DATE </th>
+            </tr>
+          </thead>
+          <thead *ngIf="dashBoard.allAgentTransactions.length == 0 ">
+            <div style="font-size: 25px;"> No Transactions</div>
+          </thead>
+          <tbody>
+            <tr *ngFor="let element of dashBoard.allAgentTransactions">
+              <!--<td class="fit">
+              <img class="user-pic rounded" src="../assets/pages/media/users/avatar4.jpg"> </td> -->
+              <td>
+                <a href="javascript:;" class="primary-link">{{element.transaction_type.name}}</a>
+              </td>
+              <td *ngIf="element.transaction_type.name == 'cashOut' ||  element.transaction_type.name == 'r2p'"> {{element.sender_identifier}}</td>
+              <td *ngIf="!(element.transaction_type.name == 'cashOut' ||  element.transaction_type.name == 'r2p')">{{element.reciever_identifier}}</td>
+
+              <td> {{element.amount}} </td>
+              <td> {{element.status}} </td>
+              <td>
+                <span class="bold theme-font">{{element.createdAt | date:'short'}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

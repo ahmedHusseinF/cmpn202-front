@@ -1,0 +1,71 @@
+th {
+  vertical-align: center;
+  text-align: center;
+}
+
+td {
+  vertical-align: center;
+  text-align: center;
+}
+
+.portlet-title {
+  color: white !important;
+}
+
+.caption {
+  font-size: 15px !important;
+}
+
+.portlet-body {
+  height: auto !important;
+  padding: 15px 0 0 0 !important;
+  vertical-align: center;
+  text-align: center;
+}
+
+.flex-space-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.padding-left-right {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.box {
+  width: 48%;
+  min-width: 220px !important;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+.inner-container>* {
+  padding: 10px 5px;
+}
+
+.inner-container h3 {
+  margin-top: .5rem;
+}
+
+@media screen and (max-width: 510px) {
+  .outer-container {
+    flex-direction: column;
+  }
+  .box {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%
+  }
+}

@@ -1,0 +1,46 @@
+.page-header.navbar .menu-toggler {
+  background-image: url('./../../../assets/layouts/layout2/img/sidebar_toggler_icon_blue.png') !important;
+}
+
+
+/* .page-sidebar .page-sidebar-menu{
+    min-height:570px !important;
+    display: block !important;
+} */
+
+.page-footer {
+  background-color: #1f2b3d !important;
+  margin-top: 0 !important;
+}
+
+.page-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+.page-container {
+  margin-top: 70px !important;
+}
+
+.CB {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin-top: 14px;
+  padding: 0 20px 0 10px;
+  border-right: 1px solid rgba(211, 211, 211, 0.34);
+}
+
+.CB strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: #8e9daa;
+}
+
+.CB .number {
+  font-size: 14px;
+  color: #3e4f5e;
+  font-weight: 600;
+}

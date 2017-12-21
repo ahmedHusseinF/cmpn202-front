@@ -1,0 +1,160 @@
+/* You can add global styles to this file, and also import other style files */
+
+body,
+html {
+  height: 100%;
+}
+
+.ng-busy-default-sign {
+  position: fixed !important;
+  border-top: -1px;
+}
+
+.portlet.light .portlet-body {
+  padding-top: 8px;
+  height: 400px;
+  overflow-x: hidden;
+}
+
+.modal-open .modal {
+  background-color: rgba(0, 0, 0, .4)
+}
+
+.page-header.navbar.navbar-fixed-top,
+.page-header.navbar.navbar-static-top {
+  z-index: 555;
+}
+
+.portlet.box>.portlet-body {
+  height: 400px;
+  overflow-x: hidden;
+}
+
+.modal .modal-header .close {
+  display: none;
+}
+
+.modal .modal-header {
+  border-bottom: none;
+  display: block;
+  background-color: #32c5d2;
+}
+
+.list-group>li {
+  font-size: 16px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: normal;
+  color: white;
+}
+
+.modal {
+  height: 100%;
+}
+
+.modal.fade .modal-dialog {
+  top: 10%;
+}
+
+.gray {
+  color: #6b6b6b;
+  font-size: 16px;
+}
+
+.modal .modal-header {
+  color: black;
+}
+
+.modal-open .modal {
+  background-color: rgba(0, 0, 0, .4)
+}
+
+.form-group {
+  font-size: 16px;
+}
+
+.form-group input {
+  font-size: 16px;
+}
+
+.form-group select {
+  font-size: 16px;
+  height: 30%;
+}
+
+.modal .modal-header .close {
+  display: none;
+}
+
+.modal-content {
+  border: none;
+  box-shadow: 0 1px 5px 0 hsla(0, 0%, 0%, 0.2);
+}
+
+.modal-content .btn {
+  font-size: 16px;
+}
+
+.modal-body {}
+
+.modal-body strong {
+  font-weight: 600;
+}
+
+.list-group-item {}
+
+.modal-footer {
+  display: block;
+  padding: 0 15px 15px !important;
+  text-align: left;
+  border-top: none;
+}
+
+div.modal-footer form {
+  margin-bottom: 0;
+  padding: 0 1.25rem !important;
+  width: 100%;
+}
+
+div.modal-footer form.pull-left .form-group {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(211, 211, 211, 0.53)
+}
+
+div.modal-footer form.form.form-group input {
+  box-shadow: 0 1px 5px 0 hsla(0, 0%, 0%, 0.07) !important;
+  width: 50%;
+}
+
+div.modal-footer form.form.form-group label {
+  font-weight: 500 !important;
+  float: left !important;
+  margin-right: 15px !important;
+}
+
+.danger {
+  background-color: #e7505a !important;
+}
+
+.success {
+  background-color: #1BBC9B !important;
+  font-size: 18px !important;
+}
+
+.alert p {
+  font-size: 14px;
+}
+
+.form-container span.help-block {
+  position: absolute;
+}
+
+input:-webkit-autofill {
+  background-color: white !important;
+}

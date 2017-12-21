@@ -1,0 +1,30 @@
+div.page-sidebar.navbar-collapse.collapse {
+  position: fixed !important;
+  height: 100% !important;
+  z-index: 999;
+}
+
+ul.page-sidebar-menu.page-header-fixed.page-sidebar-menu-hover-submenu {
+  height: 100% !important;
+  margin-bottom: 0 !important;
+}
+
+.page-content {
+  min-height: auto !important;
+}
+
+.ng-busy,
+.ng-busy>*,
+.ng-busy>ng-component>* {
+  position: fixed !important;
+}
+
+.ng-busy-backdrop {
+  position: fixed !important;
+}
+
+span.alert {
+  padding: 0 !important;
+  color: #dc3545 !important;
+  font-weight: 600;
+}

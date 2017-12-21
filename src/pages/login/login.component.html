@@ -1,0 +1,46 @@
+<div class="align-items-center full-height-width bg-blackblue">
+  <div class="form-container">
+    <form autocomplete="off" class="login-form" [formGroup]="loginForm" novalidate (keyup.enter)="login(loginForm.value,loginForm.valid,loginForm)">
+      <h3 class="form-title">Merchant Portal</h3>
+      <div class="inputs-row">
+        <div class="form-group">
+          <div class="input-icon">
+            <i class="fa fa-user"></i>
+            <input autocomplete="off" type="text" maxlength="11" class="form-control form-control-solid placeholder-no-fix" id="mobile_number"
+              placeholder="Mobile Number Or Merchant ID" formControlName="user" required>
+            <div *ngIf="error?.user.length >0">
+              <div class="alert" style="text-align:center;padding:0;" *ngFor="let msg of error.user">
+                <p style="color:#e73d4a">{{msg}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-icon">
+            <i class="fa fa-key"></i>
+            <input autocomplete="off" type="password" maxlength="6" size="6" placeholder="Enter Your mPIN" class="form-control form-control-solid placeholder-no-fix"
+              formControlName="mpin" id="Mpin" required>
+            <div *ngIf="error?.mpin.length >0">
+              <div class="alert" style="text-align:center;padding:0;" *ngFor="let msg of error.mpin">
+                <p style="color:#e73d4a">{{msg}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" (click)="login(loginForm.value,loginForm.valid,loginForm)" class="btn login-btn uppercase">
+        Login
+      </button>
+    </form>
+    <div *ngIf="errorMsg" style="position:absolute;width:100%;text-align:center;">
+      <div class="alert">
+        <p style="color:#e73d4a">{{errorMsg}}</p>
+      </div>
+      <div *ngIf="successMsg" style="position:absolute;width:100%;text-align:center;">
+        <div class="alert">
+          <p style="color:limegreen">{{successMsg}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

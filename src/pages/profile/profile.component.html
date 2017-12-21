@@ -1,0 +1,84 @@
+<div class="profile-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light ">
+                <div class="portlet-title tabbable-line">
+                    <div class="caption caption-md">
+                        <i class="icon-globe theme-font hide"></i>
+                        <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span>
+                    </div>
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#tab_1_1" data-toggle="tab">Personal Info</a>
+                        </li>
+                        <li>
+                            <a href="#tab_1_3" data-toggle="tab">Change Password</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="activeFlow" class="portlet-body">
+                    <div class="tab-content">
+                        <!-- PERSONAL INFO TAB -->
+                        <div class="tab-pane active" id="tab_1_1">
+                            <form novalidate (ngSubmit)="updateProfile()" role="form">
+                                <div class="form-group">
+                                    <label class="control-label">First Name</label>
+                                    <input type="text" name="Fname" class="form-control" [(ngModel)]="profile.fname"> </div>
+                                <div class="form-group">
+                                    <label class="control-label">Last Name</label>
+                                    <input type="text" name="Lname" class="form-control" [(ngModel)]="profile.lname"> </div>
+                                <div class="form-group">
+                                    <label class="control-label">E-mail</label>
+                                    <input type="text" name="mail" class="form-control" [(ngModel)]="profile.email"> </div>
+                                <div class="form-group">
+                                    <label class="control-label">Address</label>
+                                    <input type="text" name="address" class="form-control" [(ngModel)]="profile.address">                                    </div>
+                                <div class="form-group">
+                                    <label class="control-label">ٍScheme Name</label>
+                                    <input type="text" disabled name="scheme_id" class="form-control" [(ngModel)]="profile.scheme_id">                                    </div>
+                                <div class="form-group">
+                                    <label class="control-label">Mobile Number</label>
+                                    <input name="mobile" type="text" class="form-control" disabled [(ngModel)]="profile.mobile_number">                                    </div>
+                                <div class="form-group">
+                                    <label class="control-label">Merchant Code</label>
+                                    <input name="code" type="text" class="form-control" disabled [(ngModel)]="profile.merchant_code">                                    </div>
+                                <div class="margiv-top-30" style="margin-top: 20px;">
+                                    <button type="submit" class="btn green"> Save Changes </button>
+                                    <a href="javascript:;" class="btn default"> Cancel </a>
+                                </div>
+                                <div style="margin-top: 20px;">
+                                    <p style="color: green;font-size: 13px" *ngIf='successMsg'>{{successMsg}}</p>
+                                    <p style="color: crimson;font-size: 13px" *ngIf='errorMsg'>{{errorMsg}}</p>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- END PERSONAL INFO TAB -->
+                        <!-- CHANGE PASSWORD TAB -->
+                        <div class="tab-pane" id="tab_1_3">
+                            <form (ngSubmit)="updateProfilePin()">
+                                <div class="form-group">
+                                    <label class="control-label">Current Pin</label>
+                                    <input type="password" class="form-control" [(ngModel)]="Pin.pin1" name="pin1"> </div>
+                                <div class="form-group">
+                                    <label class="control-label">New Pin</label>
+                                    <input type="password" class="form-control " [(ngModel)]="Pin.pin2" name="pin2"> </div>
+                                <div class="form-group">
+                                    <label class="control-label">Re-type New Pin</label>
+                                    <input type="password" class="form-control" [(ngModel)]="Pin.pin3" name="pin3"> </div>
+                                <div class="margin-top-10">
+                                    <button type="submit" class="btn green"> Change Pin </button>
+                                    <a href="javascript:;" class="btn default"> Cancel </a>
+                                </div>
+                                <div style="margin-top: 20px;">
+                                    <p style="color: green;font-size: 13px" *ngIf='pinSuccessMsg'>{{pinSuccessMsg}}</p>
+                                    <p style="color: crimson;font-size: 13px" *ngIf='pinErrorMsg'>{{pinErrorMsg}}</p>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- END CHANGE PASSWORD TAB -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
