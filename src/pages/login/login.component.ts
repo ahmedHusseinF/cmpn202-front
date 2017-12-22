@@ -40,20 +40,13 @@ export class LoginComponent implements OnInit {
 
   initForm() {
     let formvalidation = {
-      email: [
-        "",
-        [
-          <any>Validators.required,
-          <any>Validators.minLength(9),
-          <any>Validators.maxLength(11)
-        ]
-      ],
+      email: ["", [<any>Validators.required]],
       password: [
         "",
         [
           <any>Validators.required,
           <any>Validators.minLength(6),
-          <any>Validators.maxLength(9)
+          <any>Validators.maxLength(20)
         ]
       ]
     };
@@ -62,14 +55,12 @@ export class LoginComponent implements OnInit {
 
     this.error_msgs = {
       email: {
-        required: "this field is required",
-        minlength: "this field must be 9 to 11 digits long",
-        maxlength: "his field must be 9 to 11 digits long"
+        required: "this field is required"
       },
       password: {
         required: "this field is required",
-        minlength: "this field must be 6 to 9 digits long",
-        maxlength: "his field must be 6 to 9 digits long"
+        minlength: "this field must be 6 to 20 characters long",
+        maxlength: "his field must be 6 to 20 characters long"
       }
     };
     this.initErrorObj();
@@ -106,7 +97,7 @@ export class LoginComponent implements OnInit {
       .postData(`/user/login`, body, "application/json", false)
       .map(res => {
         localStorage.setItem("token", res.data["token"]);
-        localStorage.setItem("username", res.data["username"]);
+        localStorage.setItem("email", res.data["email"]);
         //localStorage.setItem("logoUrl", res.data["logoUrl"]);
         console.log(res);
         return { status: res.status, data: res.data };
@@ -123,7 +114,7 @@ export class LoginComponent implements OnInit {
         if (!res.data.message)
           return (this.errorMsg = "Wrong Email or Password");
 
-        return (this.errorMsg = res.data.message);
+        return (this.errorMsg = res.data.error);
       }
     });
   }

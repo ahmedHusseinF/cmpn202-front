@@ -6,7 +6,7 @@
         <div class="form-group">
           <div class="input-icon">
             <i class="fa fa-user"></i>
-            <input autocomplete="off" type="text" maxlength="11" class="form-control form-control-solid placeholder-no-fix" id="email"
+            <input autocomplete="off" type="text" class="form-control form-control-solid placeholder-no-fix" id="email"
               placeholder="Enter you email" formControlName="email" required>
             <div *ngIf="error?.email.length > 0">
               <div class="alert" style="text-align:center;padding:0;" *ngFor="let msg of error.email">
@@ -18,7 +18,7 @@
         <div class="form-group">
           <div class="input-icon">
             <i class="fa fa-key"></i>
-            <input autocomplete="off" type="password" maxlength="6" size="6" placeholder="Enter Your password" class="form-control form-control-solid placeholder-no-fix"
+            <input autocomplete="off" type="password" maxlength="20" size="6" placeholder="Enter Your password" class="form-control form-control-solid placeholder-no-fix"
               formControlName="password" id="password" required>
             <div *ngIf="error?.password.length >0">
               <div class="alert" style="text-align:center;padding:0;" *ngFor="let msg of error.password">
