@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ApiService } from '../../services/api-service';
-import { CashService } from '../../services/cash-services';
 import { GlobalVariablesService } from '../../services/global-variables.service';
 
 @Component({
@@ -12,7 +11,6 @@ export class LayoutComponent implements OnInit {
 	constructor(
 		private cdRef: ChangeDetectorRef,
 		public api: ApiService,
-		private cashService: CashService,
 		public globals:GlobalVariablesService) { }
 
 	ngOnInit() {

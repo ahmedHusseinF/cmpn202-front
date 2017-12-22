@@ -7,7 +7,6 @@ import {
   FormBuilder,
   Validators
 } from '@angular/forms';
-import { SearchService } from '../../../app/services/search-service';
 declare var $: any;
 
 import { FormsModule } from '@angular/forms';
@@ -47,28 +46,11 @@ export class CreateMerchantComponent implements OnInit {
     private apiService: ApiService,
     private profileService: ProfileService,
     private globals: GlobalVariablesService,
-    private searchService: SearchService,
     private router: Router
   ) {
     this.title.setTitle('Create Merchant');
   }
-  search(mobile) {
-    this.mobileNotFound = null;
-    this.validationErrors = null;
-    this.globals.unSubscribe(this.searchService
-      .checkIfRegistered(mobile)
-      .subscribe(res => {
-        console.log(res);
-        if (res.status == 200) {
-          this.mobileNotFound = !res.data.mobileFound;
-        } else if (res.status == 300) {
-          this.validationErrors = res.data.validationErrors;
-        } else {
-          this.globals.showModal(res.data.message);
-        }
-        //this.toasterService.pop('success', 'Args Title', 'Args Body');
-      }));
-  }
+  
   create(merchant: any) {
     this.message = null;
     this.validationErrors = null;

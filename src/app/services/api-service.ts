@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Injectable } from "@angular/core";
+import { Http, Headers, RequestOptions } from "@angular/http";
 
-import { Observable } from 'rxjs/Observable';
-import { FlashMessagesService } from 'angular2-flash-messages';
-import 'rxjs/add/operator/map';
-import { Router } from '@angular/router';
+import { Observable } from "rxjs/Observable";
+import { FlashMessagesService } from "angular2-flash-messages";
+import "rxjs/add/operator/map";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class ApiService {
@@ -20,33 +20,32 @@ export class ApiService {
     private router: Router
   ) {
     this.baseUrl = !/localhost/.test(document.location.host)
-      ? 'https://34.230.253.250'
-      : 'http://localhost:1337';
+      ? "https://34.230.253.250"
+      : "http://localhost:1337";
 
-    this.subUrl2 = '/api/v1/agent_web/wallet_users';
-    this.subUrl = '/api/v1/agent_web';
+    this.subUrl = "/api/v1/web";
   }
   get token() {
-    return localStorage.getItem('token');
+    return localStorage.getItem("token");
   }
 
   postData(
     subUrl: string,
     data: any,
-    contentType = 'application/json',
+    contentType = "application/json",
     withToken = true
   ): Observable<any> {
     this.loading = [1];
-    let headers = new Headers({ 'Content-Type': contentType });
+    let headers = new Headers({ "Content-Type": contentType });
 
-    if (withToken) headers.append('Authorization', `JWT ${this.token}`);
+    if (withToken) headers.append("Authorization", `JWT ${this.token}`);
 
     let options = new RequestOptions({ headers: headers });
 
     let body = JSON.stringify(data);
 
     return this.http
-      .post(this.baseUrl + this.subUrl2 + subUrl, body, options)
+      .post(this.baseUrl + this.subUrl + subUrl, body, options)
       .map(res => {
         this.loading = [];
         return { status: res.status, data: res.json() };
@@ -74,7 +73,7 @@ export class ApiService {
   }
 
   handle401Status() {
-    this.router.navigateByUrl('/logout');
+    this.router.navigateByUrl("/logout");
   }
 
   //500 and weird status codes
@@ -82,14 +81,14 @@ export class ApiService {
     let message;
     data.message
       ? (message = data.message)
-      : (message = 'Something went wrong please try again later');
+      : (message = "Something went wrong please try again later");
 
-    this.showFlash(message, 'info');
+    this.showFlash(message, "info");
   }
 
   showFlash(msg, type, timeout = 4) {
     //type cane be 'danger' , 'warning', 'info' , 'success'
-    let css = 'alert-' + type;
+    let css = "alert-" + type;
     this.flashMsg.show(msg, { cssClass: css, timeout: timeout * 1000 });
   }
 }

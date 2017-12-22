@@ -7,8 +7,6 @@ import {
 } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { ConsumerService } from '../../../app/services/consumer.service';
-import { SearchService } from '../../../app/services/search-service';
 import { ProfileService } from '../../../app/services/profile.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { GlobalVariablesService } from '../../../app/services/global-variables.service';
@@ -39,10 +37,8 @@ export class CreateConsumerComponent implements OnInit {
     private title: Title,
     private localStorage: LocalStorageService,
     private formbuilder: FormBuilder,
-    private service: ConsumerService,
     private profileService: ProfileService,
     private globals: GlobalVariablesService,
-    private searchService: SearchService
   ) {
     this.title.setTitle('Create Consumer');
   }
@@ -113,42 +109,7 @@ export class CreateConsumerComponent implements OnInit {
       })
     );
   }
-  public consumer(body, valid) {
-    this.validationErrors = {};
-    if (!valid)
-      this.globals.unSubscribe(
-        this.service.consumer(body).subscribe(res => {
-          console.log(res);
-          if (res.status == 201) {
-            this.consumerForm.reset();
-            this.mobileNotFound = null;
-            this.globals.showModal('Consumer created');
-            window.scrollTo(0, 0);
-          } else if (res.status == 300) {
-            this.validationErrors = res.data.validationErrors;
-          } else {
-            this.globals.showModal(res.data.message,'danger');
-          }
-          //this.toasterService.pop('success', 'Args Title', 'Args Body');
-        })
-      );
-  }
-  public search(mobile) {
-    this.mobileNotFound = null;
-    this.validationErrors = null;
-    this.globals.unSubscribe(
-      this.searchService.checkIfRegistered(mobile).subscribe(res => {
-        console.log(res);
-        if (res.status == 200) {
-          this.mobileNotFound = !res.data.mobileFound;
-        } else if (res.status == 300) {
-          this.validationErrors = res.data.validationErrors;
-        } else {
-          this.globals.showModal(res.data.message,'danger');
-        }
-      })
-    );
-  }
+
 
   public birth() {
     this.consumerForm.patchValue({
