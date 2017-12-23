@@ -1,153 +1,199 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ApiService } from '../../../app/services/api-service';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Title } from "@angular/platform-browser";
+import { ApiService } from "../../../app/services/api-service";
 import {
   FormGroup,
   FormControl,
   FormBuilder,
   Validators
-} from '@angular/forms';
+} from "@angular/forms";
 declare var $: any;
 
-import { FormsModule } from '@angular/forms';
-import { LocalStorageService } from 'angular-2-local-storage';
-import { MerchantService } from '../../../app/services/merchant.service';
-import { ProfileService } from '../../../app/services/profile.service';
-import { GlobalVariablesService } from '../../../app/services/global-variables.service';
-import { Router } from '@angular/router';
+import { FormsModule } from "@angular/forms";
+import { GlobalVariablesService } from "../../../app/services/global-variables.service";
+import { Router } from "@angular/router";
 @Component({
-  selector: 'app-create-merchant',
-  templateUrl: './create-merchant.component.html',
-  styleUrls: ['./create-merchant.component.css'],
-  providers: [ProfileService]
+  selector: "app-create-merchant",
+  templateUrl: "./create-merchant.component.html",
+  styleUrls: ["./create-merchant.component.css"]
 })
 export class CreateMerchantComponent implements OnInit {
-  createMerchantForm: FormGroup;
-  @ViewChild('img') img;
-  createUrl: any = '/merchants/create';
-  searchMobileUrl: any = '/wallet_users/searchByPhone';
-  getProfilesUrl: any = '/merchants/listProfile';
-  createmerchantSubscribe: any;
-  searchMobileSubscribe: any;
-  getProfilesSubscribe: any;
-  message: string;
+  staffForm: FormGroup;
   validationErrors: any;
   profiles: any;
   mobileNotFound: any;
+  validationMesseges: any;
   nationalId: string;
-  merchantProfiles: any;
-  public merchantForm: FormGroup;
+  factories: any;
+  foundErr: boolean;
+  natIDNotFound: boolean;
 
   constructor(
     private title: Title,
-    private localStorage: LocalStorageService,
     private formBuilder: FormBuilder,
-    private service: MerchantService,
     private apiService: ApiService,
-    private profileService: ProfileService,
     private globals: GlobalVariablesService,
     private router: Router
   ) {
-    this.title.setTitle('Create Merchant');
+    this.title.setTitle("Create Staff");
   }
-  
-  create(merchant: any) {
-    this.message = null;
+
+  search(nationalID) {
+    const request = this.apiService
+      .postData(`/user/checkNationalID`, { nationalID })
+      .map(res => res.data);
+
+    const sub = request.subscribe(res => {
+      this.natIDNotFound = false;
+      this.foundErr = true;
+
+      if (res.userNotExist) {
+        this.natIDNotFound = true;
+        this.foundErr = false;
+        this.staffForm.patchValue({
+          national_id: nationalID
+        });
+        this.staffForm.controls.national_id.disable();
+      }
+    });
+  }
+
+  staff(body, valid, form) {
+    //console.log(body, valid, "body");
     this.validationErrors = null;
-    merchant.type = 'merchant';
-    console.log(merchant)
-    this.globals.unSubscribe(this.apiService
-      .postData(this.createUrl, merchant)
-      .subscribe(res => {
-        console.log(res);
-        if (res.status == 200) {
-          this.reset();
-          this.globals.showModal(
-            'Merchant created with code ' + res.data.merchantCode
-          );
-          window.scrollTo(0, 0);
-        } else if (res.status == 300) {
-          this.validationErrors = res.data.validationErrors;
-        } else {
-          this.globals.showModal(res.data.message);
+
+    if (!valid) {
+      //console.log(form.controls);
+      this.validationErrors = [];
+      for (let key of Object.keys(form.controls)) {
+        if (form.controls[key].errors) {
+          this.validationErrors[key] = [];
+
+          for (let keyy of Object.keys(form.controls[key].errors)) {
+            this.validationErrors[key].push(this.validationMesseges[key][keyy]);
+          }
         }
-      }));
+      }
+      //console.log(this.validationErrors);
+      return;
+    }
+
+    for (let param of body) {
+      body[param].trim();
+    }
+
+    const request = this.apiService
+      .postData(`/user/staff/create`, body)
+      .map(res => res.data);
+
+    request.subscribe(res => {
+      //console.log(res, "res");
+      if (res.status === 200) {
+        this.globals.showModal(`Staff Created Successfully`);
+      }
+    });
   }
 
   ngOnInit() {
     this.initForm();
-    this.globals.unSubscribe(this.profileService
-      .listProfile('Merchant')
-      .subscribe(res => {
-        console.log(res);
-        if (res.status == 200) {
-          this.profiles = res.data.profiles;
-          this.merchantProfiles = res.data.merchantProfiles;
-          if (this.merchantProfiles.length === 0) {
-            this.globals.showModal("please add one profile at least to create child merchant");
-            this.router.navigateByUrl('/dashboard/merchant/profile/create');
-          }
-        }
-      }));
-  }
-  uploadImage(event) {
-    let file: File = event.target.files[0];
-    if (file && (file.type.split('/')[0] !== 'image')) {
-      this.img.nativeElement.value = null;
-      return this.globals.showModal('You can only upload images', 'danger')
-    }
-    this.createMerchantForm.controls['imageExt'].setValue(file.type.split('/')[1]);
 
-    let myReader: FileReader = new FileReader();
-    myReader.onload = readerEvt => {
-      const binaryString = myReader.result;
-      this.createMerchantForm.controls['merchantImage'].setValue(btoa(binaryString));
-    };
-    myReader.readAsBinaryString(file);
+    const request = this.apiService
+      .postData(`/user/staff/getAllFactories`, {})
+      .map(res => res.data);
 
-  }
-  initForm() {
-    this.createMerchantForm = this.formBuilder.group({
-      // here
-      fname: ['', Validators.required],
-      mname: ['', Validators.required],
-      lname: ['', Validators.required],
-      national_id: ['', Validators.required],
-      city: ['', Validators.required],
-      address: ['', Validators.required],
-      mobile_number: ['', Validators.required],
-      profile_id: ['', Validators.required],
-      email: [''],
-      can_register: [false],
-      can_perform_kyc: [false],
-      parent: ['', Validators.required],
-      balance_type: [''],
-      merchant_parent_code: [''],
-      birthdate: [''],
-      gender: [''],
-      marital_status: [''],
-      phone: [''],
-      license_type: ['', [<any>Validators.required]],
-      license_value: ['', [<any>Validators.required]],
-      occupation: [''],
-      merchant_profile_id: [''],
+    request.subscribe(res => {
+      console.log(res);
+      this.factories = res.results;
     });
   }
+
+  initForm() {
+    this.staffForm = this.formBuilder.group({
+      MobileNumber: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(11),
+          Validators.maxLength(11)
+        ]
+      ],
+      FirstName: ["", [Validators.required]],
+      MiddleName: ["", [Validators.required]],
+      LastName: ["", [Validators.required]],
+      national_id: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(14),
+          Validators.maxLength(14)
+        ]
+      ],
+      NationalID: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(14),
+          Validators.maxLength(14)
+        ]
+      ],
+      Password: [
+        "",
+        [Validators.required, Validators.minLength(6), Validators.maxLength(20)]
+      ],
+      Email: ["", [Validators.required, Validators.email]],
+      Occupation: ["", [Validators.required]],
+      City: ["", []],
+      Governorate: ["", []],
+      Building: ["", []],
+      FactoryID: ["", Validators.required]
+    });
+
+    this.validationMesseges = {
+      MobileNumber: {
+        required: "This Field is required"
+      },
+      Password: {
+        required: "This Field is required",
+        minLength: "Password has to be at least 6 characters long",
+        maxLength: "Password has to be at most 20 characters long"
+      },
+      Email: {
+        required: "This Field is required",
+        email: "This isn't a proper Email"
+      },
+      OrgName: {
+        required: "This Field is required"
+      },
+      OrgAddress: {
+        required: "This Field is required"
+      },
+      Specialization: {
+        required: "This Field is required"
+      },
+      NationalID: {
+        required: "This Field is required"
+      },
+      FirstName: {
+        required: "This Field is required"
+      },
+      MiddleName: {
+        required: "This Field is required"
+      },
+      LastName: {
+        required: "This Field is required"
+      },
+      FactoryID: {
+        required: "This Field is required"
+      }
+    };
+  }
+
   reset() {
     this.validationErrors = null;
     this.mobileNotFound = null;
     this.initForm();
   }
 
-  public birth() {
-    this.createMerchantForm.patchValue({
-      birthdate: this.generateBirthDateFromNationalID(this.nationalId)
-    })
-  }
-
-  generateBirthDateFromNationalID(id) {
-    return id.slice(5, 7) + '-' + id.slice(3, 5) + '-' + id.slice(1, 3);
-  }
   ngOnDestroy() {
     this.globals.unSubscribe();
   }

@@ -139,7 +139,7 @@ export class CreateConsumerComponent implements OnInit {
       .postData(`/user/checkNationalID`, { nationalID })
       .map(res => res.data);
 
-    request.subscribe(res => {
+    const sub = request.subscribe(res => {
       this.natIDNotFound = false;
       this.foundErr = true;
 
