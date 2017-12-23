@@ -30,12 +30,12 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: "create-merchant",
+        path: "create-staff",
         component: CreateMerchantComponent,
         canActivate: [haveAccess]
       },
       {
-        path: "create-consumer",
+        path: "create-customer",
         component: CreateConsumerComponent,
         canActivate: [haveAccess]
       },

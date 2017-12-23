@@ -29,10 +29,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private title: Title,
     private api: ApiService,
-    private localStorage: LocalStorageService,
     private formbuilder: FormBuilder,
     private router: Router
   ) {
+    localStorage.setItem('token', '');
     if (this.token)
       this.router.navigate(["/dashboard/home"], { replaceUrl: true });
     this.title.setTitle("Login");
@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit {
       .postData(`/user/login`, body, "application/json", false)
       .map(res => {
         localStorage.setItem("token", res.data["token"]);
-        localStorage.setItem("email", res.data["email"]);
+        localStorage.setItem("username", res.data["username"]);
         //localStorage.setItem("logoUrl", res.data["logoUrl"]);
         console.log(res);
         return { status: res.status, data: res.data };

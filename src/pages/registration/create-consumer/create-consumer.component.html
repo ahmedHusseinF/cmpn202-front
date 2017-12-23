@@ -1,200 +1,182 @@
 <div class="animated fadeIn">
   <div class="card">
     <div class="card-header">
-      <i class="fa fa-user"></i> Create Consumer</div>
+      <i class="fa fa-user"></i> Create Customer</div>
     <div class="card-block">
-      <form class="form" [formGroup]="consumerForm" novalidate (ngSubmit)="consumer(consumerForm.value,consumerForm.valid)">
+      <form class="form" [formGroup]="customerForm" novalidate (ngSubmit)="customer(customerForm.value, customerForm.valid, customerForm)">
 
-        <div>
+        <div *ngIf="!natIDNotFound">
           <div class="form-group">
             <div class="row">
               <div class="form-group col-md-4">
                 <h5>Wallet Information</h5>
               </div>
               <div class="form-group col-md-5">
-                <label for="m-number">MSISDN
+                <label for="m-number">National ID
                   <span class="required aria-required">*</span>
                 </label>
-                <input type="text" id="m-number" formControlName="mobile_number" class="form-control" maxlength="11" required>
-                <div *ngIf="validationErrors?.mobile_number">
-                  <span class="alert" *ngFor="let error of validationErrors.mobile_number"> {{error.message}}</span>
+                <input type="text" id="m-number" formControlName="NationalID" class="form-control" maxlength="14" required>
+                <div *ngIf="validationErrors?.NationalID">
+                  <span class="alert" *ngFor="let error of validationErrors.NationalID"> {{error}}</span>
                 </div>
               </div>
               <div class="form-group col-md-3">
-                <button class="btn btn-lg btn-primary" type="button" style="margin-top: 28px;" (click)="search(consumerForm.get('mobile_number').value)">Register</button>
+                <button class="btn btn-lg btn-primary" type="button" style="margin-top: 28px;" (click)="search(customerForm.get('NationalID').value)">Search</button>
               </div>
-              <div *ngIf="mobileNotFound===false" class=" alert alert-danger col-9 ">
-                <p>This Mobile Number is already registerd to a different user, please try another one.</p>
+              <div *ngIf="foundErr" class=" alert alert-danger col-9 ">
+                <p>This National ID is already registerd to a different user, please try another one.</p>
               </div>
             </div>
           </div>
         </div>
-        <div *ngIf="mobileNotFound===true">
+        <div *ngIf="natIDNotFound">
           <div class="form-group">
-            <div class="row ">
-              <div class="row-line"></div>
+            <div class="row">
               <div class="form-group col-md-4">
-                <h5>Consumer Information</h5>
+                <h5>Customer Information</h5>
               </div>
               <div class="col-md-8 display-flex-wrap padding-left-0">
                 <div class="form-group col-md-6">
                   <label for="fname">First Name
                     <span class="required aria-required">*</span>
                   </label>
-                  <input type="text" id="fname" formControlName="fname" class="form-control" required>
-                  <div *ngIf="validationErrors?.fname">
-                    <span class="alert" *ngFor="let error of validationErrors.fname"> {{error.message}}</span>
+                  <input type="text" id="fname" formControlName="FirstName" class="form-control" required>
+                  <div *ngIf="validationErrors?.FirstName">
+                    <span class="alert" *ngFor="let error of validationErrors.FirstName"> {{error}}</span>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="mname">Middle Name
                     <span class="required aria-required">*</span>
                   </label>
-                  <input type="text" id="mname" formControlName="mname" class="form-control" required>
-                  <div *ngIf="validationErrors?.mname">
-                    <span class="alert" *ngFor="let error of validationErrors.mname"> {{error.message}}</span>
+                  <input type="text" id="mname" formControlName="MiddleName" class="form-control" required>
+                  <div *ngIf="validationErrors?.MiddleName">
+                    <span class="alert" *ngFor="let error of validationErrors.MiddleName"> {{error}}</span>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="lname">Last Name
                     <span class="required aria-required">*</span>
                   </label>
-                  <input type="text" id="lname" formControlName="lname" class="form-control" required>
-                  <div *ngIf="validationErrors?.lname">
-                    <span class="alert" *ngFor="let error of validationErrors.lname"> {{error.message}}</span>
+                  <input type="text" id="lname" formControlName="LastName" class="form-control" required>
+                  <div *ngIf="validationErrors?.LastName">
+                    <span class="alert" *ngFor="let error of validationErrors.LastName"> {{error}}
+                      <br>
+                    </span>
                   </div>
                 </div>
 
+                <div class="form-group col-md-6">
+                  <label for="password">Password
+                    <span class="required aria-required">*</span>
+                  </label>
+                  <input type="password" id="Password" minlength="6" maxlength="20" formControlName="Password" class="form-control" required>
+                  <div *ngIf="validationErrors?.Password">
+                    <span class="alert" *ngFor="let error of validationErrors.Password"> {{error}}</span>
+                  </div>
+                </div>
 
                 <div class="form-group col-md-6">
                   <label for="national_id">National ID
                     <span class="required aria-required">*</span>
                   </label>
-                  <input type="text" id="national_id" maxlength="14" formControlName="national_id" class="form-control" required [(ngModel)]="nationalId"
-                    (change)="birth()">
+                  <input type="text" id="national_id" maxlength="14" formControlName="national_id" class="form-control" required>
                   <div *ngIf="validationErrors?.national_id">
-                    <span class="alert" *ngFor="let error of validationErrors.national_id"> {{error.message}}</span>
+                    <span class="alert" *ngFor="let error of validationErrors.national_id"> {{error}}</span>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="birthdate">Birth Date
+                  <label for="email">Email
                     <span class="required aria-required">*</span>
                   </label>
-                  <input type="text" id="birthdate" disabled [value]="consumerForm.get('birthdate').value" class="form-control" required>
-                  <div *ngIf="validationErrors?.birthdate">
-                    <span class="alert" *ngFor="let error of validationErrors.birthdate"> {{error.message}}</span>
-                  </div>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="gender">Gender</label>
-                  <select formControlName="gender" id="gender" class="form-control">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                  <div *ngIf="validationErrors?.gender">
-                    <span class="alert" *ngFor="let error of validationErrors.gender"> {{error.message}}</span>
-                  </div>
-                </div>
-                <div class="form-group col-md-6">
-
-                  <label for="marital_status">Marital Status</label>
-                  <select formControlName="marital_status" id="marital_status" class="form-control">
-                    <option value="Single">Single</option>
-                    <option value="Married">Married</option>
-                  </select>
-                  <div *ngIf="validationErrors?.marital_status">
-                    <span class="alert" *ngFor="let error of validationErrors.marital_status"> {{error.message}}</span>
-                  </div>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="profile_id ">Wallet User Profile
-                    <span class="required aria-required ">*</span>
-                  </label>
-                  <select formControlName="profile_id" id="profile_id " class="form-control" required>
-                    <option *ngFor="let profile of profiles" [ngValue]="profile.id">{{profile.name}}</option>
-                  </select>
-                  <div *ngIf="validationErrors?.profile_id">
-                    <span class="alert" *ngFor="let error of validationErrors.profile_id "> {{error.message}}</span>
-                  </div>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="occupation">Occupation</label>
-                  <input type="text " formControlName="occupation" id="occupation " class="form-control ">
-                  <div *ngIf="validationErrors?.occupation ">
-                    <span class="alert " *ngFor="let error of validationErrors.occupation"> {{error.message}}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="row-line"></div>
-              <div class="form-group col-md-4">
-                <h5>Contact Information</h5>
-              </div>
-              <div class="col-md-8 display-flex-wrap padding-left-0">
-                <div class="form-group col-md-6">
-                  <label for="phone">Phone</label>
-                  <input type="text" name="phone" formControlName="phone" id="phone" class="form-control">
-                  <div *ngIf="validationErrors?.phone">
-                    <span class="alert" *ngFor="let error of validationErrors.phone"> {{error.message}}</span>
-                  </div>
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label for="email">Email</label>
-                  <input type="text" name="email" id="email" formControlName="email" class="form-control">
-                  <div *ngIf="validationErrors?.email">
-                    <span class="alert" *ngFor="let error of validationErrors.email"> {{error.message}}</span>
-                  </div>
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label for="address">Address
-                    <span class="required aria-required">*</span>
-                  </label>
-                  <input type="text" name="address" id="address" formControlName="address" class="form-control" required>
-                  <div *ngIf="validationErrors?.address">
-                    <span class="alert" *ngFor="let error of validationErrors.address"> {{error.message}}</span>
+                  <input type="email" id="email" id="email" formControlName="Email" class="form-control" required>
+                  <div *ngIf="validationErrors?.Email">
+                    <span class="alert" *ngFor="let error of validationErrors.Email"> {{error}}</span>
                   </div>
                 </div>
 
                 <div class="form-group col-md-6">
                   <label for="city">City
-                    <span class="required aria-required">*</span>
                   </label>
-                  <input type="text" name="city" id="city" formControlName="city" class="form-control" required>
-                  <div *ngIf="validationErrors?.city">
-                    <span class="alert" *ngFor="let error of validationErrors.city"> {{error.message}}</span>
+                  <input type="text" id="city" id="city" formControlName="City" class="form-control">
+                  <div *ngIf="validationErrors?.City">
+                    <span class="alert" *ngFor="let error of validationErrors.City"> {{error}}</span>
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="gov">Governorate
+                  </label>
+                  <input type="text" id="gov" id="governorate" formControlName="Governorate" class="form-control">
+                  <div *ngIf="validationErrors?.Governorate">
+                    <span class="alert" *ngFor="let error of validationErrors.Governorate"> {{error}}</span>
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="building">Building
+                  </label>
+                  <input type="text" id="building" formControlName="Building" class="form-control">
+                  <div *ngIf="validationErrors?.Building">
+                    <span class="alert" *ngFor="let error of validationErrors.Building"> {{error}}</span>
                   </div>
                 </div>
 
                 <div class="form-group col-md-6">
-                  <label for="serial">Application Serial Number</label>
-                  <input type="text" name="serial" id="serial" class="form-control">
+                  <label for="mobile_number">Mobile Number
+                    <span class="required aria-required">*</span>
+                  </label>
+                  <input type="text " formControlName="MobileNumber" id="mobile_number" class="form-control" required>
+                  <div *ngIf="validationErrors?.MobileNumber">
+                    <span class="alert " *ngFor="let error of validationErrors.MobileNumber"> {{error}}</span>
+                  </div>
                 </div>
-
                 <div class="form-group col-md-6">
-                  <label for="upload">Upload Image</label>
-                  <input #img type="file" accept="image/*" name="image" id="upload" (change)="uploadImage($event)" class="form-control">
+                  <label for="spec">Specialization
+                    <span class="required aria-required">*</span>
+                  </label>
+                  <input type="text" formControlName="Specialization" id="spec" class="form-control" required>
+                  <div *ngIf="validationErrors?.Specialization">
+                    <span class="alert " *ngFor="let error of validationErrors.Specialization"> {{error}}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="form-group">
             <div class="row">
               <div class="row-line"></div>
               <div class="form-group col-md-4">
-                <h5>Notes</h5>
+                <h5>Organization Information</h5>
               </div>
               <div class="col-md-8 display-flex-wrap padding-left-0">
-                <div class="form-group col-md-12">
-                  <textarea formControlName="notes" class="form-control" name="notes " id="notes " rows="6"></textarea>
-                  <div *ngIf="validationErrors?.notes">
-                    <span class="alert " *ngFor="let error of validationErrors.notes "> {{error.message}}</span>
+                <div class="form-group col-md-6">
+                  <label for="org_name">Organization Name
+                    <span class="required aria-required">*</span>
+                  </label>
+                  <input type="text" name="email" id="org_name" formControlName="OrgName" class="form-control">
+                  <div *ngIf="validationErrors?.OrgName">
+                    <span class="alert" *ngFor="let error of validationErrors.OrgName"> {{error}}</span>
                   </div>
                 </div>
+
+                <div class="form-group col-md-6">
+                  <label for="org_telno">Organization Telephone</label>
+                  <input type="text" name="org_telno" formControlName="OrgTelNo" id="org_telno" class="form-control">
+                  <div *ngIf="validationErrors?.OrgTelNo">
+                    <span class="alert" *ngFor="let error of validationErrors.OrgTelNo"> {{error}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="org_address">Organization Address
+                    <span class="required aria-required">*</span>
+                  </label>
+                  <input type="text" name="org_address" id="org_address" formControlName="OrgAddress" class="form-control" required>
+                  <div *ngIf="validationErrors?.OrgAddress">
+                    <span class="alert" *ngFor="let error of validationErrors.OrgAddress"> {{error}}</span>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>

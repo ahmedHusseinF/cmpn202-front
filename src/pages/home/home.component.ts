@@ -22,12 +22,11 @@ export class HomeComponent implements OnInit {
   constructor(private title: Title, private localStorage: LocalStorageService,
     private service: dashBoardService, private globals: GlobalVariablesService) {
     this.title.setTitle("Home");
-    this.balance = this.localStorage.get('current_balance');
   }
 
   ngOnInit() {
     this.dashBoard.allAgentTransactions = []
-    this.getdashboard();
+    //this.getdashboard();
   }
 
   getdashboard(){
