@@ -1,0 +1,78 @@
+.full-height-width {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.bg-blackblue {
+  background-color: #2f3c51;
+  background: linear-gradient(-45deg, #09203f 0%, #537895 100%);
+  background-size: 400% 400%;
+  animation: wave 7000ms ease infinite;
+}
+
+@keyframes wave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.form-container {
+  max-width: 350px;
+  min-width: 290px;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.inputs-row {
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+
+.form-title {
+  color: white;
+  font-weight: 600;
+  font-size: 40px;
+}
+
+.form-title:first-child {
+  margin-bottom: 0;
+}
+
+.form-control {
+  height: 45px;
+  border-radius: 5px;
+  border: none;
+}
+
+i.fa {
+  margin: 15px 2px 4px 10px;
+}
+
+.login-btn {
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  background-color: #17b7c8;
+  color: white !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  padding: 10px 30px;
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2) !important;
+  transform: translateY(0);
+  transition: translateY 300ms, background-color 300ms;
+}
+
+.login-btn:hover {
+  transform: translateY(-1px);
+  background-color: rgb(59, 209, 223);
+}

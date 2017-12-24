@@ -1,0 +1,46 @@
+<div class="align-items-center full-height-width bg-blackblue">
+  <div class="form-container">
+    <form autocomplete="off" class="login-form" [formGroup]="loginForm" novalidate (keyup.enter)="login(loginForm.value,loginForm.valid,loginForm)">
+      <h3 class="form-title">Factroy Portal</h3>
+      <div class="inputs-row">
+        <div class="form-group">
+          <div class="input-icon">
+            <i class="fa fa-user"></i>
+            <input autocomplete="off" type="text" class="form-control form-control-solid placeholder-no-fix" id="email"
+              placeholder="Enter you email" formControlName="email" required>
+            <div *ngIf="error?.email.length > 0">
+              <div class="alert" style="text-align:center;padding:0;" *ngFor="let msg of error.email">
+                <p style="color:#e73d4a">{{msg}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-icon">
+            <i class="fa fa-key"></i>
+            <input autocomplete="off" type="password" maxlength="20" size="6" placeholder="Enter Your password" class="form-control form-control-solid placeholder-no-fix"
+              formControlName="password" id="password" required>
+            <div *ngIf="error?.password.length >0">
+              <div class="alert" style="text-align:center;padding:0;" *ngFor="let msg of error.password">
+                <p style="color:#e73d4a">{{msg}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" (click)="login(loginForm.value,loginForm.valid,loginForm)" class="btn login-btn uppercase">
+        Login
+      </button>
+    </form>
+    <div *ngIf="errorMsg" style="position:absolute;width:100%;text-align:center;">
+      <div class="alert">
+        <p style="color:#e73d4a">{{errorMsg}}</p>
+      </div>
+      <div *ngIf="successMsg" style="position:absolute;width:100%;text-align:center;">
+        <div class="alert">
+          <p style="color:limegreen">{{successMsg}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
