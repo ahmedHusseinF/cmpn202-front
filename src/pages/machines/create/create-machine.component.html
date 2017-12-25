@@ -1,46 +1,143 @@
-<div class="align-items-center full-height-width bg-blackblue">
-  <div class="form-container">
-    <form autocomplete="off" class="login-form" [formGroup]="loginForm" novalidate (keyup.enter)="login(loginForm.value,loginForm.valid,loginForm)">
-      <h3 class="form-title">Factroy Portal</h3>
-      <div class="inputs-row">
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      <i class="fa fa-user"></i> Create Machine</div>
+    <div class="card-block">
+      <form class="form" [formGroup]="machineForm" novalidate (ngSubmit)="create(machineForm.value, machineForm.valid, machineForm)">
+
+
         <div class="form-group">
-          <div class="input-icon">
-            <i class="fa fa-user"></i>
-            <input autocomplete="off" type="text" class="form-control form-control-solid placeholder-no-fix" id="email"
-              placeholder="Enter you email" formControlName="email" required>
-            <div *ngIf="error?.email.length > 0">
-              <div class="alert" style="text-align:center;padding:0;" *ngFor="let msg of error.email">
-                <p style="color:#e73d4a">{{msg}}</p>
+          <div class="row">
+            <div class="form-group col-md-4">
+              <h5>Machine Information</h5>
+            </div>
+            <div class="col-md-8 display-flex-wrap padding-left-0">
+              <div class="form-group col-md-6">
+                <label for="MachName">Machine Name
+                  <span class="required aria-required">*</span>
+                </label>
+                <input type="text" id="MachName" formControlName="MachName" class="form-control" required>
+                <div *ngIf="validationErrors?.MachName">
+                  <span class="alert" *ngFor="let error of validationErrors.MachName"> {{error}}</span>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="MachType">Machine Type
+                  <span class="required aria-required">*</span>
+                </label>
+                <input type="text" id="MachType" formControlName="MachType" class="form-control" required>
+                <div *ngIf="validationErrors?.MachType">
+                  <span class="alert" *ngFor="let error of validationErrors.MachType"> {{error}}</span>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="MachSize">Machine Size
+                  <span class="required aria-required">*</span>
+                </label>
+                <input type="text" id="MachSize" formControlName="MachSize" class="form-control" required>
+                <div *ngIf="validationErrors?.MachSize">
+                  <span class="alert" *ngFor="let error of validationErrors.MachSize"> {{error}}
+                    <br>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="MachWeight">Machine Weight
+                  <span class="required aria-required">*</span>
+                </label>
+                <input type="text" id="MachWeight" formControlName="MachWeight" class="form-control" required>
+                <div *ngIf="validationErrors?.MachWeight">
+                  <span class="alert" *ngFor="let error of validationErrors.MachWeight"> {{error}}</span>
+                </div>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="AssembledBy">Assembled By
+                  <span class="required aria-required">*</span>
+                </label>
+                <input type="text" id="AssembledBy" formControlName="AssembledBy" class="form-control" required>
+                <div *ngIf="validationErrors?.AssembledBy">
+                  <span class="alert" *ngFor="let error of validationErrors.AssembledBy"> {{error}}</span>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="AssembledOn">Assembled On
+                </label>
+                <input type="text" id="AssembledOn" formControlName="AssembledOn" class="form-control" required>
+                <div *ngIf="validationErrors?.AssembledOn">
+                  <span class="alert" *ngFor="let error of validationErrors.AssembledOn"> {{error}}</span>
+                </div>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="ManufDuration">Manufacture Duration
+                </label>
+                <input type="text" id="ManufDuration" formControlName="ManufDuration" class="form-control">
+                <div *ngIf="validationErrors?.ManufDuration">
+                  <span class="alert" *ngFor="let error of validationErrors.ManufDuration"> {{error}}</span>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="MachProductivity">Machine Productivity
+                </label>
+                <input type="text" id="MachProductivity" formControlName="MachProductivity" class="form-control">
+                <div *ngIf="validationErrors?.MachProductivity">
+                  <span class="alert" *ngFor="let error of validationErrors.MachProductivity"> {{error}}</span>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="MachPrice">Machine Price
+                  <span class="required aria-required">*</span>
+                </label>
+                <input type="text" id="MachPrice" formControlName="MachPrice" class="form-control">
+                <div *ngIf="validationErrors?.MachPrice">
+                  <span class="alert" *ngFor="let error of validationErrors.MachPrice"> {{error}}</span>
+                </div>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="MachAvailability">Machine Availability
+                  <span class="required aria-required">*</span>
+                </label>
+                <input type="text " formControlName="MachAvailability" id="MachAvailability" class="form-control" required>
+                <div *ngIf="validationErrors?.MachAvailability">
+                  <span class="alert " *ngFor="let error of validationErrors.MachAvailability"> {{error}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="row-line"></div>
+            <div class="form-group col-md-4">
+              <h5>Factory Information</h5>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="FactoryID">Factory Name
+                <span class="required aria-required">*</span>
+              </label>
+              <select id="FactoryID" formControlName="FactoryID" class="form-control" required>
+                <option *ngFor=" let factory of factories" [ngValue]="factory.FactoryID">{{factory.FName}}</option>
+              </select>
+              <div *ngIf="validationErrors?.FactoryID">
+                <span class="alert error" *ngFor="let error of validationErrors.FactoryID"> {{error}}</span>
               </div>
             </div>
           </div>
         </div>
         <div class="form-group">
-          <div class="input-icon">
-            <i class="fa fa-key"></i>
-            <input autocomplete="off" type="password" maxlength="20" size="6" placeholder="Enter Your password" class="form-control form-control-solid placeholder-no-fix"
-              formControlName="password" id="password" required>
-            <div *ngIf="error?.password.length >0">
-              <div class="alert" style="text-align:center;padding:0;" *ngFor="let msg of error.password">
-                <p style="color:#e73d4a">{{msg}}</p>
-              </div>
-            </div>
+          <div class="row" style="margin-bottom: 0;">
+            <div class="row-line"></div>
+            <button type="submit " class="btn btn-lg btn-primary">Create</button>
+            <button type="reset" class="btn btn-lg btn-danger">Reset</button>
           </div>
         </div>
-      </div>
-      <button type="button" (click)="login(loginForm.value,loginForm.valid,loginForm)" class="btn login-btn uppercase">
-        Login
-      </button>
-    </form>
-    <div *ngIf="errorMsg" style="position:absolute;width:100%;text-align:center;">
-      <div class="alert">
-        <p style="color:#e73d4a">{{errorMsg}}</p>
-      </div>
-      <div *ngIf="successMsg" style="position:absolute;width:100%;text-align:center;">
-        <div class="alert">
-          <p style="color:limegreen">{{successMsg}}</p>
-        </div>
-      </div>
+
+      </form>
+
     </div>
   </div>
 </div>

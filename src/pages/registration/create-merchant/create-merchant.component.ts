@@ -98,7 +98,7 @@ export class CreateMerchantComponent implements OnInit {
     this.initForm();
 
     const request = this.apiService
-      .postData(`/user/staff/getAllFactories`, {})
+      .postData(`/getAllFactories`, {})
       .map(res => res.data);
 
     request.subscribe(res => {

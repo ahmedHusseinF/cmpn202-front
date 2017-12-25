@@ -10,6 +10,7 @@ import { LogoutComponent } from "../pages/logout/logout.component";
 import { guestAccess } from "./services/access-controls/guest.service";
 import { haveAccess } from "./services/access-controls/have-access.service";
 import { ProfileComponent } from "../pages/profile/profile.component";
+import { CreateMachineComponent } from "../pages/machines/create/create-machine.component";
 
 export const routes: Routes = [
   {
@@ -47,6 +48,11 @@ export const routes: Routes = [
       {
         path: "profile",
         component: ProfileComponent,
+        canActivate: [haveAccess]
+      },
+      {
+        path: "create-machine",
+        component: CreateMachineComponent,
         canActivate: [haveAccess]
       }
     ]

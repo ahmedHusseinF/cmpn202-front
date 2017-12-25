@@ -71,7 +71,7 @@
               *ngIf="globals.getAction('consumer_registration')"
               *ngIf="globals.getAction('merchant_registration')"
         -->
-        <li class="nav-item" >
+        <li class="nav-item">
           <a href="javascript:;" class="nav-link nav-toggle">
             <i class="fa fa-registered"></i>
             <span class="title">Registration</span>
@@ -79,14 +79,37 @@
             <span class="arrow open"></span>
           </a>
           <ul class="sub-menu">
-            <li class="nav-item start active" >
+            <li class="nav-item start">
               <a routerLink="/dashboard/create-customer" routerLinkActive="active" class="nav-link">
                 <span class="title">Create Customer</span>
                 <span class="selected"></span>
               </a>
             </li>
 
-            <li class="nav-item start" >
+            <li class="nav-item start">
+              <a routerLink="/dashboard/create-staff" routerLinkActive="active" class="nav-link">
+                <span class="title">Create Staff</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="fa fa-gears"></i>
+            <span class="title">Create</span>
+            <span class="selected"></span>
+            <span class="arrow open"></span>
+          </a>
+          <ul class="sub-menu">
+            <li class="nav-item start">
+              <a routerLink="/dashboard/create-machine" routerLinkActive="active" class="nav-link">
+                <span class="title">Machine</span>
+                <span class="selected"></span>
+              </a>
+            </li>
+
+            <li class="nav-item start">
               <a routerLink="/dashboard/create-staff" routerLinkActive="active" class="nav-link">
                 <span class="title">Create Staff</span>
               </a>

@@ -22,6 +22,7 @@ export class CreateMachineComponent implements OnInit {
   public machineForm: FormGroup;
   validationMesseges: any;
   validationErrors: any;
+  factories: any;
   message: any;
 
   constructor(
@@ -36,83 +37,51 @@ export class CreateMachineComponent implements OnInit {
 
   initForm() {
     let formvalidation = {
-      MobileNumber: [
-        "",
-        [
-          <any>Validators.required,
-          <any>Validators.minLength(11),
-          <any>Validators.maxLength(11)
-        ]
-      ],
-      FirstName: ["", [<any>Validators.required]],
-      MiddleName: ["", [<any>Validators.required]],
-      LastName: ["", [<any>Validators.required]],
-      national_id: [
-        "",
-        [
-          <any>Validators.required,
-          <any>Validators.minLength(14),
-          <any>Validators.maxLength(14)
-        ]
-      ],
-      NationalID: [
-        "",
-        [
-          <any>Validators.required,
-          <any>Validators.minLength(14),
-          <any>Validators.maxLength(14)
-        ]
-      ],
-      Password: [
-        "",
-        [
-          <any>Validators.required,
-          <any>Validators.minLength(6),
-          <any>Validators.maxLength(20)
-        ]
-      ],
-      Email: ["", [<any>Validators.required, <any>Validators.email]],
-      Specialization: ["", [<any>Validators.required]],
-      OrgTelNo: ["", []],
-      City: ["", []],
-      Governorate: ["", []],
-      Building: ["", []],
-      OrgName: ["", [<any>Validators.required]],
-      OrgAddress: ["", [<any>Validators.required]]
+      ManufDuration: ["", []],
+      AssembledOn: ["", []],
+      AssembledBy: ["", [Validators.required]],
+      MachType: ["", [Validators.required]],
+      MachAvailability: ["", [Validators.required]],
+      MachPrice: ["", [Validators.required]],
+      MachProductivity: ["", [Validators.required]],
+      MachWeight: ["", [Validators.required]],
+      MachSize: ["", [Validators.required]],
+      MachName: ["", [Validators.required]],
+      FactoryID: ["", [Validators.required]]
     };
 
     this.validationMesseges = {
-      MobileNumber: {
+      FactoryID: {
         required: "This Field is required"
       },
-      Password: {
-        required: "This Field is required",
-        minLength: "Password has to be at least 6 characters long",
-        maxLength: "Password has to be at most 20 characters long"
-      },
-      Email: {
-        required: "This Field is required",
-        email: "This isn't a proper Email"
-      },
-      OrgName: {
+      MachName: {
         required: "This Field is required"
       },
-      OrgAddress: {
+      MachSize: {
         required: "This Field is required"
       },
-      Specialization: {
+      MachWeight: {
         required: "This Field is required"
       },
-      NationalID: {
+      MachProductivity: {
         required: "This Field is required"
       },
-      FirstName: {
+      MachPrice: {
         required: "This Field is required"
       },
-      MiddleName: {
+      MachAvailability: {
         required: "This Field is required"
       },
-      LastName: {
+      MachType: {
+        required: "This Field is required"
+      },
+      AssembledBy: {
+        required: "This Field is required"
+      },
+      AssembledOn: {
+        required: "This Field is required"
+      },
+      ManufDuration: {
         required: "This Field is required"
       }
     };
@@ -122,9 +91,19 @@ export class CreateMachineComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    const request = this.api
+      .postData(`/getAllFactories`, {})
+      .map(res => res.data);
+
+    const sub = request.subscribe(res => {
+      console.log(res);
+      this.factories = res.results;
+      sub.unsubscribe();
+    });
+    this.globals.unSubscribe();
   }
 
-  customer(body: any, valid: boolean, form: FormGroup) {
+  create(body: any, valid: boolean, form: FormGroup) {
     console.log(body, valid, "body");
     this.validationErrors = null;
 
@@ -149,14 +128,22 @@ export class CreateMachineComponent implements OnInit {
     }
 
     const request = this.api
-      .postData(`/user/customer/create`, body)
+      .postData(`/machine/create`, body)
       .map(res => res.data);
 
     request.subscribe(res => {
       //console.log(res, "res");
       if (res.status === 200) {
-        this.globals.showModal(`Customer Created Successfully`);
+        this.globals
+          .showModal(`Customer Created Successfully`)
+          .subscribe(() => {
+            console.log(`went in`);
+          });
+        setTimeout(document.location.reload, 1000); // refresh after 1 second
       }
+      this.globals.showModal(`Something went wrong`).subscribe(() => {
+        console.log(`went in`);
+      });
     });
   }
 
